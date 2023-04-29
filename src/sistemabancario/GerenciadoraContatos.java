@@ -1,5 +1,6 @@
 package sistemabancario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  */
 public class GerenciadoraContatos {
 
-	private List<Contato> contatosAgenda;
+	private List<Contato> contatosAgenda = new ArrayList<>();
 
 	public GerenciadoraContatos(List<Contato> contatosAgenda) {
 		this.contatosAgenda = contatosAgenda;
@@ -39,7 +40,17 @@ public class GerenciadoraContatos {
 	 * Adiciona um novo contato � lista de contatos do banco.
 	 * @param novoContato novo contato a ser adicionado
 	 */
-	public void adicionaContato (Contato novoContato) {
+	
+	private boolean contatoAdicionado(Contato contato) {
+		return contatosAgenda.contains(contato);
+	}
+	
+	public void adicionaContato (Contato novoContato)throws Exception {
+		
+		if (novoContato.getNome()== null || novoContato.getNome().isEmpty() || novoContato.getEmail() == null || novoContato.getEmail().isEmpty()) {
+			throw new Exception("O nome e o email do contato são obrigatórios!");
+		}
+		
 		contatosAgenda.add(novoContato);
 	}
 
