@@ -20,7 +20,7 @@ import sistemabancario.GerenciadoraContatos;
  * @author Diego Morais e Wallace Neves
  * @date 29/04/2023
  */
-public class GerenciadoraContatosTest2 {
+public class GerenciadoraContatosTest {
 
 	private GerenciadoraContatos gerContatos;
 	
@@ -28,14 +28,14 @@ public class GerenciadoraContatosTest2 {
 	private int idContato02 = 2;
 	private int idContato03 = 3;
 
-
+	
 	@Before
 	public void setUp() {
 		
-		//************* Montagem do cenário global **********
-		Contato contato01 = new Contato(idContato01, "Joao da Silva", 47, "joaodasilva@gmail.com");
-		Contato contato02 = new Contato(idContato02, "Maria da Silva", 10, "mariadasilva@gmail.com");
-		Contato contato03 = new Contato(idContato03, "Rafaela", 19, "rafaeladasilva@gmail.com");
+		//Montagem do cenario global 
+		Contato contato01 = new Contato(idContato01, "Robson Pomponet", 47, "robson@gmail.com");
+		Contato contato02 = new Contato(idContato02, "Emanuel Martins", 10, "mariadasilva@gmail.com");
+		Contato contato03 = new Contato(idContato03, "Johnny Tafur", 19, "johnnytafur@gmail.com");
 
 
 		List<Contato> contatosAgenda = new ArrayList<>();
@@ -50,7 +50,7 @@ public class GerenciadoraContatosTest2 {
 
 	@After
 	public void tearDown() {
-		//************* Desmontagem do cenário global **********//
+		//Desmontagem do cenário global
 		gerContatos.limpa();
 	}
 
@@ -60,27 +60,30 @@ public class GerenciadoraContatosTest2 {
 	 * @author Diego Morais e Wallace Neves
 	 * @date 29/04/2023
 	 */
+	
 	@Test
 	public void testPesquisaContato() {
 
-		/* ========== Execucao ========== */
+		//Execucao
 		Contato contato = gerContatos.pesquisaContato(idContato01);
 
-		/* ========== Verifica��es ========== */
+		//Verificacao
 		assertThat(contato.getId(), is(idContato01));
 		assertNotNull(idContato01);
 		assertThat(gerContatos.getContatosAgenda().size(),is(3));
 
 	}
 	
+	
 	@Test
 	public void testPesquisaContatoInexistente() {
 		
-		/* ========== Execu��o ========== */
+		//execucao do teste
 		Contato contato = gerContatos.pesquisaContato(10);
-
-		/* ========== Verifica��es ========== */
+		
+		//verificacao do teste
 		assertNull(contato);
+	
 	}
 	
 
@@ -93,14 +96,27 @@ public class GerenciadoraContatosTest2 {
 	@Test
 	public void testRemoveContato() {
 		
-		//Execucao do teste
+		//execucao do teste
 		boolean contatoRemovido = gerContatos.removeContato(idContato02);
 
-		//Verificacao do teste
+		//verificacao do teste
 		assertThat(contatoRemovido, is(true));
-		assertThat(gerContatos.getContatosAgenda().size(), is(1));
+		assertThat(gerContatos.getContatosAgenda().size(), is(2));
 		assertNull(gerContatos.pesquisaContato(idContato02));
 
+	}
+	
+	@Test
+	public void testRemoveContatoInexistente() {
+		
+		//execucao do teste
+		boolean contatoRemovido = gerContatos.removeContato(idContato04);
+		
+		//verificacao do teste
+		assertThat(contatoRemovido, is(false));
+		assertThat(gerContatos.getContatosAgenda().size(), is(3));
+		
+		
 	}
 
 	
@@ -119,6 +135,7 @@ public class GerenciadoraContatosTest2 {
 		
 		//verificacao do teste
 		assertTrue(true);
+		assertNotNull(contato);
 		
 	}
 	
